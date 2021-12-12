@@ -19,5 +19,6 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 private:
-
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Line Up", meta=(AllowPrivateAccess="true", MakeEditWidget))
+	TArray<FVector> lineUpSpots;
 };
