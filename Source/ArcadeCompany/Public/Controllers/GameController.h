@@ -19,4 +19,24 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	
+	
+
+#pragma region Spawn Settings
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Spawning", meta=(AllowPrivateAccess="true", MakeEditWidget))
+	FVector spawnLocation;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Spawning", meta=(AllowPrivateAccess="true"))
+	float MinSpawnWaitTime;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Spawning", meta=(AllowPrivateAccess="true"))
+	float MaxSpawnWaitTime;
+
+	FTimerHandle nextSpawnTimer;
+	
+	void SpawnCharacter();
+	void StartSpawnTimer();
+
+#pragma endregion
+	
 };

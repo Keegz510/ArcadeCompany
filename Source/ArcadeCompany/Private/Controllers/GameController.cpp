@@ -17,3 +17,11 @@ void AGameController::BeginPlay()
 	Super::BeginPlay();
 	
 }
+
+void AGameController::SpawnCharacter()
+{
+}
+
+void AGameController::StartSpawnTimer()
+{
+}
