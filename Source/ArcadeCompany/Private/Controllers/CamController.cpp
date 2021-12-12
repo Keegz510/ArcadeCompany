@@ -11,10 +11,8 @@ ACamController::ACamController()
 	PrimaryActorTick.bCanEverTick = false;
 
 	springArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("Spring Arm"));
-	springArm->bInheritPitch = false;
-	springArm->bInheritRoll = false;
-	springArm->bUsePawnControlRotation = true;
-	
+	springArm->TargetArmLength = 1000.0f;
+	springArm->SetupAttachment(RootComponent);
 	camera = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
 	camera->SetupAttachment(springArm, USpringArmComponent::SocketName);
 }
