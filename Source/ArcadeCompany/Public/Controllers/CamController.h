@@ -24,6 +24,11 @@ protected:
 
 private:
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Components", meta=(AllowPrivateAccess="true"))
+	class USpringArmComponent* springArm;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Components", meta=(AllowPrivateAccess="true"))
+	class UCameraComponent* camera;
+
 	void MoveForward(const float value);
 	void MoveRight(const float value);
 };

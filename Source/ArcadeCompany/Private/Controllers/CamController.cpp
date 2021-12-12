@@ -2,13 +2,21 @@
 
 
 #include "ArcadeCompany/Public/Controllers/CamController.h"
-
+#include "GameFramework/SpringArmComponent.h"
+#include "Camera/CameraComponent.h"
 // Sets default values
 ACamController::ACamController()
 {
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
 
+	springArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("Spring Arm"));
+	springArm->bInheritPitch = false;
+	springArm->bInheritRoll = false;
+	springArm->bUsePawnControlRotation = true;
+	
+	camera = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
+	camera->SetupAttachment(springArm, USpringArmComponent::SocketName);
 }
 
 // Called when the game starts or when spawned
