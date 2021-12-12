@@ -37,7 +37,7 @@ void ACamController::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 
 void ACamController::MoveForward(const float value)
 {
-	if(Controller && value > 0)
+	if(Controller && value != 0)
 	{
 		const FRotator rotation = Controller->GetControlRotation();
 		const FVector direction = FRotationMatrix(rotation).GetScaledAxis(EAxis::X);
@@ -47,7 +47,7 @@ void ACamController::MoveForward(const float value)
 
 void ACamController::MoveRight(const float value)
 {
-	if(Controller && value > 0)
+	if(Controller && value != 0)
 	{
 		const FRotator rotation = Controller->GetControlRotation();
 		const FVector direction = FRotationMatrix(rotation).GetScaledAxis(EAxis::Y);
