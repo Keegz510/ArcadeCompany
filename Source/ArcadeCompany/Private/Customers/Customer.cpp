@@ -15,7 +15,14 @@ ACustomer::ACustomer()
 void ACustomer::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	int selectGender = FMath::RandRange(1, 100);
+	if(selectGender > 50)
+	{
+		GetMesh()->SetSkeletalMesh(maleMesh);
+	} else
+	{
+		GetMesh()->SetSkeletalMesh(femaleMesh);
+	}
 }
 
 
