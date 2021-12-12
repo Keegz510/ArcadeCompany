@@ -6,6 +6,23 @@
 #include "GameFramework/Actor.h"
 #include "SnackbarController.generated.h"
 
+USTRUCT(BlueprintType)
+struct FSnack
+{
+	GENERATED_BODY()
+public:
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	FName SnackName;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	int32 SnackCost;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	int32 SnackPrice;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	int32 OnShelf;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	int32 InStockRoom;
+};
+
 UCLASS()
 class ARCADECOMPANY_API ASnackbarController : public AActor
 {
@@ -21,4 +38,7 @@ protected:
 private:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Line Up", meta=(AllowPrivateAccess="true", MakeEditWidget))
 	TArray<FVector> lineUpSpots;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Snacks", meta=(AllowPrivateAccess="true"))
+	TArray<FSnack> snacks;
 };
