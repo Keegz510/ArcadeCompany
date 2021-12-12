@@ -30,6 +30,9 @@ public:
 	int32 InStockRoom;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	TEnumAsByte<ESnackStoreType> StorageType;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	float snackSatisfaction;
+	
 };
 
 UCLASS()
