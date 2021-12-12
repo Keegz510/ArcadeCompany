@@ -6,6 +6,13 @@
 #include "GameFramework/Actor.h"
 #include "SnackbarController.generated.h"
 
+UENUM()
+enum class ESnackStoreType : uint8
+{
+	FRIDGE,
+	SHELF
+};
+
 USTRUCT(BlueprintType)
 struct FSnack
 {
@@ -21,6 +28,8 @@ public:
 	int32 OnShelf;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	int32 InStockRoom;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	TEnumAsByte<ESnackStoreType> StorageType;
 };
 
 UCLASS()
@@ -41,4 +50,15 @@ private:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Snacks", meta=(AllowPrivateAccess="true"))
 	TArray<FSnack> snacks;
+
+	/// How many items can be in the fridge at once
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Stock", meta=(AllowPrivateAccess="true"))
+	int32 fridgeCapacity;
+	/// Reference to how many items are in the fridge
+	int32 stockInFridge;
+	/// How many items can be in the fridge at once
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Stock", meta=(AllowPrivateAccess="true"))
+	int32 shelfCapacity;
+	/// Reference to how many items are in the fridge
+	int32 stockOnShelf;
 };
