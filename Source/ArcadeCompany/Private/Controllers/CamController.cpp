@@ -21,7 +21,8 @@ ACamController::ACamController()
 void ACamController::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	currentCameraZoom = maxCameraZoom / 1.25f;
+	springArm->TargetArmLength = currentCameraZoom;
 }
 
 // Called to bind functionality to input
