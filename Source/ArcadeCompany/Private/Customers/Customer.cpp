@@ -8,7 +8,7 @@ ACustomer::ACustomer()
 {
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
-
+	SetSatisfactionDecreases();
 }
 
 // Called when the game starts or when spawned
@@ -23,6 +23,12 @@ void ACustomer::BeginPlay()
 	{
 		GetMesh()->SetSkeletalMesh(femaleMesh);
 	}
+}
+
+void ACustomer::SetSatisfactionDecreases()
+{
+	WaitTimeDecrease = FMath::RandRange(satisfactionValues.MinWaitTimeDecrease, satisfactionValues.MaxWaitTimeDecrease);
+	WrongSnackDecrease = FMath::RandRange(satisfactionValues.minWrongSnackDecrease, satisfactionValues.maxWrongSnackDecrease);
 }
 
 

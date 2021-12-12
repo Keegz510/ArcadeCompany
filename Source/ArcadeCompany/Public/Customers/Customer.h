@@ -8,6 +8,26 @@
 
 class USkeletalMesh;
 
+USTRUCT(BlueprintType)
+struct FSatisfactionValues
+{
+	GENERATED_BODY()
+public:
+	/// Min Decrease in satisfaction if Waiting for a snack or a machine
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	float MinWaitTimeDecrease;
+	/// Min Decrease in satisfaction if provived the wrong snack
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	float MaxWaitTimeDecrease;
+
+	/// Min Decrease in satisfaction if provived the wrong snack
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	float minWrongSnackDecrease;
+	/// Min Decrease in satisfaction if provived the wrong snack
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	float maxWrongSnackDecrease;
+};
+
 UCLASS()
 class ARCADECOMPANY_API ACustomer : public ACharacter
 {
@@ -26,6 +46,16 @@ protected:
 	USkeletalMesh* maleMesh;
 	/// Reference to the character female Mesh
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Meshes", meta=(AllowPrivateAccess="true"))
-	USkeletalMesh* femaleMesh; 
-	
+	USkeletalMesh* femaleMesh;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Satisfaction", meta=(AllowPrivateAccess="true"))
+	FSatisfactionValues satisfactionValues;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category="Satisfaction", meta=(AllowPrivateAccess="true"))
+	float WaitTimeDecrease;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category="Satisfaction", meta=(AllowPrivateAccess="true"))
+	float WrongSnackDecrease;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Satisfaction", meta=(AllowPrivateAccess="true"))
+	float currentSatisfaction = 50.0f;
+
+	void SetSatisfactionDecreases();
 };
