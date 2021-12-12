@@ -23,5 +23,31 @@ void ACamController::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
+	// Movements
+	PlayerInputComponent->BindAxis("MoveForward", this, &ACamController::MoveForward);
+	PlayerInputComponent->BindAxis("MoveRight", this, &ACamController::MoveRight);
+	PlayerInputComponent->BindAxis("Rotate", this, &ACharacter::AddControllerYawInput);
 }
+
+void ACamController::MoveForward(const float value)
+{
+	if(Controller && value > 0)
+	{
+		const FRotator rotation = Controller->GetControlRotation();
+		const FVector direction = FRotationMatrix(rotation).GetScaledAxis(EAxis::X);
+		AddMovementInput(direction, value);
+	}
+}
+
+void ACamController::MoveRight(const float value)
+{
+	if(Controller && value > 0)
+	{
+		const FRotator rotation = Controller->GetControlRotation();
+		const FVector direction = FRotationMatrix(rotation).GetScaledAxis(EAxis::Y);
+		AddMovementInput(direction, value);
+	}
+}
+
+
 

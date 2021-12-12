@@ -24,4 +24,6 @@ protected:
 
 private:
 
+	void MoveForward(const float value);
+	void MoveRight(const float value);
 };
