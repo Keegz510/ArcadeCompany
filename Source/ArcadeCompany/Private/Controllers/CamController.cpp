@@ -33,6 +33,10 @@ void ACamController::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 	PlayerInputComponent->BindAxis("MoveForward", this, &ACamController::MoveForward);
 	PlayerInputComponent->BindAxis("MoveRight", this, &ACamController::MoveRight);
 	PlayerInputComponent->BindAxis("Rotate", this, &ACharacter::AddControllerYawInput);
+
+	// Camera Zoom
+	PlayerInputComponent->BindAction("ZoomIn", IE_Pressed, this, &ACamController::ZoomIn);
+	PlayerInputComponent->BindAction("ZoomOut", IE_Pressed, this, &ACamController::ZoomOut);
 }
 
 void ACamController::MoveForward(const float value)
@@ -52,6 +56,24 @@ void ACamController::MoveRight(const float value)
 		const FRotator rotation = Controller->GetControlRotation();
 		const FVector direction = FRotationMatrix(rotation).GetScaledAxis(EAxis::Y);
 		AddMovementInput(direction, value);
+	}
+}
+
+void ACamController::ZoomIn()
+{
+	if(springArm && currentCameraZoom > minCameraZoom)
+	{
+		currentCameraZoom -= (1 * cameraZoomSpeed);
+		springArm->TargetArmLength = currentCameraZoom;
+	}
+}
+
+void ACamController::ZoomOut()
+{
+	if(springArm && currentCameraZoom < maxCameraZoom)
+	{
+		currentCameraZoom += (1 * cameraZoomSpeed);
+		springArm->TargetArmLength = currentCameraZoom;
 	}
 }
 
