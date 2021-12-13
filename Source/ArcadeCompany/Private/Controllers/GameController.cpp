@@ -12,6 +12,26 @@ AGameController::AGameController()
 
 }
 
+void AGameController::ToggleBuildMode()
+{
+	bIsBuildMode = !bIsBuildMode;
+	if(bIsBuildMode)
+	{
+		if(GEngine)
+		{
+			UE_LOG(LogTemp, Log, TEXT("Entering Build Mode"))
+		}
+		// TODO: Display Building UI
+	} else
+	{
+		if(GEngine)
+		{
+			UE_LOG(LogTemp, Log, TEXT("Exiting Build Mode"))
+		}
+		// TODO: Hide Building UI
+	}
+}
+
 // Called when the game starts or when spawned
 void AGameController::BeginPlay()
 {

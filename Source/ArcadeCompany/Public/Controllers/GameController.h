@@ -15,6 +15,7 @@ public:
 	// Sets default values for this actor's properties
 	AGameController();
 
+	void ToggleBuildMode();
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -40,5 +41,6 @@ protected:
 	void StartSpawnTimer();
 
 #pragma endregion
-	
+
+	bool bIsBuildMode = false;
 };
