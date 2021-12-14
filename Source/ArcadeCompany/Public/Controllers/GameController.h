@@ -16,6 +16,8 @@ public:
 	AGameController();
 
 	void ToggleBuildMode();
+	UFUNCTION(BlueprintCallable)
+	FORCEINLINE bool IsInBuildMode() const { return bIsBuildMode; }
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -43,4 +45,7 @@ protected:
 #pragma endregion
 
 	bool bIsBuildMode = false;
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void ToggleBuildingUI();
 };
