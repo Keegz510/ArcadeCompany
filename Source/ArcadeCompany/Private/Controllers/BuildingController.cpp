@@ -32,7 +32,8 @@ void ABuildingController::Tick(float DeltaTime)
 
 void ABuildingController::LineTraceToGround()
 {
-
+	if(placingMachine == nullptr) return;
+	
 	if(auto playerController = UGameplayStatics::GetPlayerController(GetWorld(), 0))
 	{
 		FHitResult hit;
@@ -42,10 +43,8 @@ void ABuildingController::LineTraceToGround()
 		{
 			if(comp->ComponentHasTag("Placeable"))
 			{
-				if(GEngine)
-				{
-					GEngine->AddOnScreenDebugMessage(-1, 3, FColor::Blue, "Hit Placeable Object", false);
-				}
+				FVector location = hit.Location;
+				placingMachine->SetActorLocation(location);
 			}
 		}
 	}

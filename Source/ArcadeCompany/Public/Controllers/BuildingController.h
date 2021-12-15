@@ -18,6 +18,8 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	void SetPlacingMachine(AActor* machine);
+
 
 protected:
 	// Called when the game starts or when spawned
@@ -31,6 +33,7 @@ private:
 
 
 	class AGameController* Controller;
-	
+
+	AActor* placingMachine;
 
 };
