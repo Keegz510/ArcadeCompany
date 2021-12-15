@@ -39,7 +39,8 @@ void ABuildingController::SetPlacingMachine(FName machineName)
 		// If the names match then set the placing object & break out of the loop
 		if(object.ObjectName == machineName)
 		{
-			placingMachine = object.PlacingObject;
+			
+			placingMachine = GetWorld()->SpawnActor<AArcadeMachine>(object.PlacingObject, FVector::ZeroVector, FRotator::ZeroRotator);
 			break;
 		}
 	}

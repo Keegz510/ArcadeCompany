@@ -14,7 +14,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	FName ObjectName;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	class AArcadeMachine* PlacingObject;
+	TSubclassOf<class AArcadeMachine> PlacingObject;
 };
 
 UCLASS()
