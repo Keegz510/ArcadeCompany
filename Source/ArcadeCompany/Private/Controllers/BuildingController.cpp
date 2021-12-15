@@ -33,22 +33,36 @@ void ABuildingController::Tick(float DeltaTime)
 
 void ABuildingController::SetPlacingMachine(FName machineName)
 {
-	
+	// Loop through each object to find the specified object
+	for(auto object :  placeableObjects)
+	{
+		// If the names match then set the placing object & break out of the loop
+		if(object.ObjectName == machineName)
+		{
+			placingMachine = object.PlacingObject;
+			break;
+		}
+	}
 }
 
 void ABuildingController::LineTraceToGround()
 {
+	// Ensure we have selected a machine before running any cast
 	if(placingMachine == nullptr) return;
-	
+
+	// Get the player controller
 	if(auto playerController = UGameplayStatics::GetPlayerController(GetWorld(), 0))
 	{
-		FHitResult hit;
+		FHitResult hit;				// Reference to the hit with raycast
+		// Run the line trace
 		playerController->GetHitResultUnderCursor(ECollisionChannel::ECC_WorldDynamic, true, hit);
 
+		// Check the component we hit & see if it has the placeable tag
 		if(UPrimitiveComponent* comp = hit.GetComponent())
 		{
 			if(comp->ComponentHasTag("Placeable"))
 			{
+				// Set the machine at that location
 				const FVector location = hit.Location;
 				placingMachine->SetActorLocation(location);
 			}
