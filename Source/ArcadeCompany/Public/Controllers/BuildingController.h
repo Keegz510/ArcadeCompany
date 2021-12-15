@@ -6,6 +6,17 @@
 #include "GameFramework/Actor.h"
 #include "BuildingController.generated.h"
 
+USTRUCT(BlueprintType)
+struct FPlaceableObject
+{
+	GENERATED_BODY()
+public:
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	FName ObjectName;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	class AArcadeMachine* PlacingObject;
+};
+
 UCLASS()
 class ARCADECOMPANY_API ABuildingController : public AActor
 {
@@ -18,7 +29,7 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	void SetPlacingMachine(AActor* machine);
+	void SetPlacingMachine(FName machineName);
 
 
 protected:
@@ -34,6 +45,9 @@ private:
 
 	class AGameController* Controller;
 
-	AActor* placingMachine;
+	class AArcadeMachine* placingMachine;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Placing Objects", meta=(AllowPrivateAccess="true"))
+	TArray<FPlaceableObject> placeableObjects;
 
 };

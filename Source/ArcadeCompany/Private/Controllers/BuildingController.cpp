@@ -3,6 +3,7 @@
 
 #include "ArcadeCompany/Public/Controllers/BuildingController.h"
 #include "ArcadeCompany/Public/Controllers/GameController.h"
+#include "ArcadeCompany/Public/ArcadeMachine.h"
 #include "Kismet/GameplayStatics.h"
 
 // Sets default values
@@ -30,6 +31,11 @@ void ABuildingController::Tick(float DeltaTime)
 	LineTraceToGround();	
 }
 
+void ABuildingController::SetPlacingMachine(FName machineName)
+{
+	
+}
+
 void ABuildingController::LineTraceToGround()
 {
 	if(placingMachine == nullptr) return;
@@ -43,7 +49,7 @@ void ABuildingController::LineTraceToGround()
 		{
 			if(comp->ComponentHasTag("Placeable"))
 			{
-				FVector location = hit.Location;
+				const FVector location = hit.Location;
 				placingMachine->SetActorLocation(location);
 			}
 		}
