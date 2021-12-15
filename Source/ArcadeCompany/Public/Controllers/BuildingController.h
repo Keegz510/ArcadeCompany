@@ -32,10 +32,13 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void SetPlacingMachine(FName machineName);
 
+	/// Cancels the placement of the current object
 	UFUNCTION(BlueprintCallable)
 	void CancelPlacement();
+	/// Rotates the current placing object
 	UFUNCTION(BlueprintCallable)
 	void RotatePlacingObject();
+	
 
 
 protected:
@@ -47,13 +50,16 @@ protected:
 
 private:
 	void LineTraceToGround();
-
-
+	/// Reference to the game controller
 	class AGameController* Controller;
 
+	/// The object we are currently placing in the world
 	class AArcadeMachine* placingMachine;
-
+	
+	/// Reference to all the objects that we can place in the world
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Placing Objects", meta=(AllowPrivateAccess="true"))
 	TArray<FPlaceableObject> placeableObjects;
+
+	
 
 };
