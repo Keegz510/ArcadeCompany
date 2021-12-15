@@ -2,6 +2,8 @@
 
 
 #include "ArcadeCompany/Public/Controllers/BuildingController.h"
+#include "ArcadeCompany/Public/Controllers/GameController.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 ABuildingController::ABuildingController()
@@ -15,13 +17,40 @@ ABuildingController::ABuildingController()
 void ABuildingController::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	Controller = Cast<AGameController>(UGameplayStatics::GetActorOfClass(GetWorld(), AGameController::StaticClass()));
 }
+
 
 // Called every frame
 void ABuildingController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+	if(Controller != nullptr && !Controller->IsInBuildMode()) return;
 
+	LineTraceToGround();	
 }
+
+void ABuildingController::LineTraceToGround()
+{
+
+	if(auto playerController = UGameplayStatics::GetPlayerController(GetWorld(), 0))
+	{
+		FHitResult hit;
+		playerController->GetHitResultUnderCursor(ECollisionChannel::ECC_WorldDynamic, true, hit);
+
+		if(UPrimitiveComponent* comp = hit.GetComponent())
+		{
+			if(comp->ComponentHasTag("Placeable"))
+			{
+				if(GEngine)
+				{
+					GEngine->AddOnScreenDebugMessage(-1, 3, FColor::Blue, "Hit Placeable Object", false);
+				}
+			}
+		}
+	}
+	
+	
+}
+
 
