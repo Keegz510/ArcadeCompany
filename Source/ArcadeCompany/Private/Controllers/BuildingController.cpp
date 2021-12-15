@@ -55,6 +55,16 @@ void ABuildingController::CancelPlacement()
 	placingMachine = nullptr;
 }
 
+void ABuildingController::RotatePlacingObject()
+{
+	if(placingMachine == nullptr)
+		return;
+
+	const FRotator currentRotation = placingMachine->GetActorRotation();
+	const FRotator newRotation = FRotator(currentRotation.Pitch, currentRotation.Yaw + 90.0f, currentRotation.Roll);
+	placingMachine->SetActorRotation(newRotation);
+}
+
 void ABuildingController::LineTraceToGround()
 {
 	// Ensure we have selected a machine before running any cast

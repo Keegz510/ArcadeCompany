@@ -3,9 +3,12 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "BuildingController.h"
 #include "Camera/CameraComponent.h"
 #include "GameFramework/Character.h"
 #include "CamController.generated.h"
+
+class ABuildingController;
 
 UCLASS()
 class ARCADECOMPANY_API ACamController : public ACharacter
@@ -19,6 +22,7 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	/// Returns the position of the camera
 	FORCEINLINE FVector GetCameraPosition() const { return camera->GetComponentLocation();}
 
 protected:
@@ -45,6 +49,11 @@ private:
 	/// How fast the camera will zoom in at
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Zoom Settings", meta=(AllowPrivateAccess="true"))
 	float cameraZoomSpeed = 1.0f;
+
+	/// Reference to the building controller
+	ABuildingController* buildingController;
+
+	
 	/// Handles moving backwards & forwards
 	void MoveForward(const float value);
 	/// Handles moving left & right
@@ -52,6 +61,8 @@ private:
 
 	/// Handles the user input for cancelling building placement
 	void CancelBuilding();
+	/// Handles calling the rotate method on the placing machine
+	void RotateMachine();
 
 	/// Handles the camera zoom in
 	void ZoomIn();

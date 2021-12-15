@@ -34,6 +34,8 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void CancelPlacement();
+	UFUNCTION(BlueprintCallable)
+	void RotatePlacingObject();
 
 
 protected:

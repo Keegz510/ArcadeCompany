@@ -26,6 +26,9 @@ void ACamController::BeginPlay()
 	Super::BeginPlay();
 	currentCameraZoom = maxCameraZoom / 1.25f;
 	springArm->TargetArmLength = currentCameraZoom;
+
+	buildingController = Cast<ABuildingController>(UGameplayStatics::GetActorOfClass(GetWorld(), ABuildingController::StaticClass()));
+	
 }
 
 // Called to bind functionality to input
@@ -42,8 +45,9 @@ void ACamController::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 	PlayerInputComponent->BindAction("ZoomIn", IE_Pressed, this, &ACamController::ZoomIn);
 	PlayerInputComponent->BindAction("ZoomOut", IE_Pressed, this, &ACamController::ZoomOut);
 
-	// Cancel build placement
+	// Placement Controls
 	PlayerInputComponent->BindAction("CancelPlacement", IE_Pressed, this, &ACamController::CancelBuilding);
+	PlayerInputComponent->BindAction("RotatePlacingObject", IE_Pressed, this, &ACamController::RotateMachine);
 }
 
 void ACamController::MoveForward(const float value)
@@ -68,12 +72,18 @@ void ACamController::MoveRight(const float value)
 
 void ACamController::CancelBuilding()
 {
-	if(auto bc = Cast<ABuildingController>(
-		UGameplayStatics::GetActorOfClass(GetWorld(), AGameController::StaticClass()
-	)))
-	{
-		bc->CancelPlacement();
-	}
+	if(buildingController == nullptr)
+		return; 
+
+	buildingController->CancelPlacement();
+}
+
+void ACamController::RotateMachine()
+{
+	if(buildingController == nullptr)
+		return;
+
+	buildingController->RotatePlacingObject();
 }
 
 void ACamController::ZoomIn()
