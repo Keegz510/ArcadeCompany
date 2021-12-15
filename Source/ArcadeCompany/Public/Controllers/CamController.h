@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Camera/CameraComponent.h"
 #include "GameFramework/Character.h"
 #include "CamController.generated.h"
 
@@ -17,6 +18,8 @@ public:
 	
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
+	FORCEINLINE FVector GetCameraPosition() const { return camera->GetComponentLocation();}
 
 protected:
 	// Called when the game starts or when spawned
