@@ -32,6 +32,9 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void SetPlacingMachine(FName machineName);
 
+	UFUNCTION(BlueprintCallable)
+	void CancelPlacement();
+
 
 protected:
 	// Called when the game starts or when spawned

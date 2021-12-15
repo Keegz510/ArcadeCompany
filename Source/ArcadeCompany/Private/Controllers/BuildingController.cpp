@@ -46,6 +46,15 @@ void ABuildingController::SetPlacingMachine(FName machineName)
 	}
 }
 
+void ABuildingController::CancelPlacement()
+{
+	if(placingMachine == nullptr)
+		return;
+
+	placingMachine->Destroy();
+	placingMachine = nullptr;
+}
+
 void ABuildingController::LineTraceToGround()
 {
 	// Ensure we have selected a machine before running any cast

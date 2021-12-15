@@ -50,6 +50,9 @@ private:
 	/// Handles moving left & right
 	void MoveRight(const float value);
 
+	/// Handles the user input for cancelling building placement
+	void CancelBuilding();
+
 	/// Handles the camera zoom in
 	void ZoomIn();
 	/// Handles the camera zoom out

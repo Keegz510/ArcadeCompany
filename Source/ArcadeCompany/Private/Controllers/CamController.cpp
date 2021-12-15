@@ -4,6 +4,9 @@
 #include "ArcadeCompany/Public/Controllers/CamController.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
+#include "Controllers/BuildingController.h"
+#include "Controllers/GameController.h"
+#include "Kismet/GameplayStatics.h"
 // Sets default values
 ACamController::ACamController()
 {
@@ -38,6 +41,9 @@ void ACamController::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 	// Camera Zoom
 	PlayerInputComponent->BindAction("ZoomIn", IE_Pressed, this, &ACamController::ZoomIn);
 	PlayerInputComponent->BindAction("ZoomOut", IE_Pressed, this, &ACamController::ZoomOut);
+
+	// Cancel build placement
+	PlayerInputComponent->BindAction("CancelPlacement", IE_Pressed, this, &ACamController::CancelBuilding);
 }
 
 void ACamController::MoveForward(const float value)
@@ -57,6 +63,16 @@ void ACamController::MoveRight(const float value)
 		const FRotator rotation = Controller->GetControlRotation();
 		const FVector direction = FRotationMatrix(rotation).GetScaledAxis(EAxis::Y);
 		AddMovementInput(direction, value);
+	}
+}
+
+void ACamController::CancelBuilding()
+{
+	if(auto bc = Cast<ABuildingController>(
+		UGameplayStatics::GetActorOfClass(GetWorld(), AGameController::StaticClass()
+	)))
+	{
+		bc->CancelPlacement();
 	}
 }
 
