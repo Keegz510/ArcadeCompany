@@ -38,7 +38,9 @@ public:
 	/// Rotates the current placing object
 	UFUNCTION(BlueprintCallable)
 	void RotatePlacingObject();
-	
+	/// Places the object in the world
+	UFUNCTION(BlueprintCallable)
+	void PlaceObjectInWorld();
 
 
 protected:

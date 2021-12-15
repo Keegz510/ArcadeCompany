@@ -48,6 +48,7 @@ void ACamController::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 	// Placement Controls
 	PlayerInputComponent->BindAction("CancelPlacement", IE_Pressed, this, &ACamController::CancelBuilding);
 	PlayerInputComponent->BindAction("RotatePlacingObject", IE_Pressed, this, &ACamController::RotateMachine);
+	PlayerInputComponent->BindAction("PlaceObject", IE_Pressed, this, &ACamController::PlaceObject);
 }
 
 void ACamController::MoveForward(const float value)
@@ -84,6 +85,14 @@ void ACamController::RotateMachine()
 		return;
 
 	buildingController->RotatePlacingObject();
+}
+
+void ACamController::PlaceObject()
+{
+	if(buildingController == nullptr)
+		return;
+
+	buildingController->PlaceObjectInWorld();
 }
 
 void ACamController::ZoomIn()

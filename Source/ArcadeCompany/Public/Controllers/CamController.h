@@ -58,11 +58,16 @@ private:
 	void MoveForward(const float value);
 	/// Handles moving left & right
 	void MoveRight(const float value);
-
+#pragma region Placing Controls
+	
 	/// Handles the user input for cancelling building placement
 	void CancelBuilding();
 	/// Handles calling the rotate method on the placing machine
 	void RotateMachine();
+	/// Handles calling the place object method
+	void PlaceObject();
+	
+#pragma endregion
 
 	/// Handles the camera zoom in
 	void ZoomIn();

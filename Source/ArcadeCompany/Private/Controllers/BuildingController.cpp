@@ -65,6 +65,17 @@ void ABuildingController::RotatePlacingObject()
 	placingMachine->SetActorRotation(newRotation);
 }
 
+void ABuildingController::PlaceObjectInWorld()
+{
+	// Return if we're not placing an object in the world or we don't have a reference to the game controller
+	if(placingMachine == nullptr || Controller == nullptr)
+		return;
+	
+	Controller->AddArcadeMachine(placingMachine);		// Adds the object to the list of machines
+	placingMachine = nullptr;							// Sets the placing object to null as we aren't placing anything now
+	Controller->ToggleBuildMode();						// Takes us out of build mode
+}
+
 void ABuildingController::LineTraceToGround()
 {
 	// Ensure we have selected a machine before running any cast
