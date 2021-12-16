@@ -38,6 +38,8 @@ public:
 	// Sets default values for this character's properties
 	ACustomer();
 
+	FORCEINLINE UBehaviorTree* GetBT() const { return behaviorTree; }
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -58,6 +60,7 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Satisfaction", meta=(AllowPrivateAccess="true"))
 	float currentSatisfaction = 50.0f;
 
+	/// Reference to the behaviour tree
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="AI", meta=(AllowPrivateAccess="true"))
 	UBehaviorTree* behaviorTree;
 
