@@ -29,6 +29,17 @@ public:
 	float maxWrongSnackDecrease;
 };
 
+UENUM(BlueprintType)
+enum ECustomerState
+{
+	Deciding,
+	WantsSnack,
+	OrderSnack,
+	PlayingMachine,
+	MoveToMachine,
+	FindMachine
+};
+
 UCLASS()
 class ARCADECOMPANY_API ACustomer : public ACharacter
 {
@@ -61,8 +72,11 @@ protected:
 	float currentSatisfaction = 50.0f;
 
 	/// Reference to the behaviour tree
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="AI", meta=(AllowPrivateAccess="true"))
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="AI|Components", meta=(AllowPrivateAccess="true"))
 	UBehaviorTree* behaviorTree;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="AI|States", meta=(AllowPrivateAccess="true"))
+	TEnumAsByte<ECustomerState> currentState;
 
 	void SetSatisfactionDecreases();
 };

@@ -13,6 +13,7 @@ ACustomerController::ACustomerController()
 	bbComponent = CreateDefaultSubobject<UBlackboardComponent>(TEXT("BB Component"));
 
 	MoveToLoc = FName(TEXT("MoveToLocation"));
+	CustState = FName(TEXT("CustomerState"));
 }
 
 void ACustomerController::OnPossess(APawn* InPawn)
