@@ -32,6 +32,7 @@ private:
 
 #pragma region Blackboard Keys
 
+	FName MoveToLoc;
 
 #pragma endregion
 

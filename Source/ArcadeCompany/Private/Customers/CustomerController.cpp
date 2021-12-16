@@ -11,6 +11,8 @@ ACustomerController::ACustomerController()
 {
 	btComponent = CreateDefaultSubobject<UBehaviorTreeComponent>(TEXT("BT Component"));
 	bbComponent = CreateDefaultSubobject<UBlackboardComponent>(TEXT("BB Component"));
+
+	MoveToLoc = FName(TEXT("MoveToLocation"));
 }
 
 void ACustomerController::OnPossess(APawn* InPawn)
