@@ -23,12 +23,12 @@ void AGameController::BeginPlay()
 {
 	Super::BeginPlay();
 	StartSpawnTimer();
+	storeCash = startWithStoreCash;
 }
 
 void AGameController::SpawnCharacter()
 {
-
-	UE_LOG(LogTemp, Warning, TEXT("May Spawn Character"));
+	
 	// Generate a random value to help determine if someone is coming into the store
 	int randValue = FMath::RandRange(1, 100);
 	

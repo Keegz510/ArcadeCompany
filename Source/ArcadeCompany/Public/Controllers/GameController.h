@@ -22,6 +22,9 @@ public:
 	FORCEINLINE bool IsInBuildMode() const { return bIsBuildMode; }
 	/// Adds a new machine to the world
 	FORCEINLINE void AddArcadeMachine(AArcadeMachine* machine) { machinesInWorld.Add(machine);}
+
+	/// Returns the amount of cash the player has
+	FORCEINLINE int32 GetStoreCash() const { return storeCash; }
 	
 protected:
 	// Called when the game starts or when spawned
@@ -59,4 +62,11 @@ private:
 	/// List of arcade machines placed in the world
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="In World Items", meta=(AllowPrivateAccess="true"))
 	TArray<AArcadeMachine*> machinesInWorld;
+
+	/// Reference to the amount of cash the store has
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Store Properties", meta=(AllowPrivateAccess="true"))
+	int32 storeCash;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Store Properties|Settings", meta=(AllowPrivateAccess="true"))
+	int32 startWithStoreCash;
 };
