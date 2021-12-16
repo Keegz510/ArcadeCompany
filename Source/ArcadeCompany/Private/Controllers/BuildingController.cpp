@@ -39,9 +39,20 @@ void ABuildingController::SetPlacingMachine(FName machineName)
 		// If the names match then set the placing object & break out of the loop
 		if(object.ObjectName == machineName)
 		{
+			if(Controller->GetStoreCash() >= object.machineCost)
+			{
+				placingMachine = GetWorld()->SpawnActor<AArcadeMachine>(object.PlacingObject, FVector::ZeroVector, FRotator::ZeroRotator);
+				placingMachine->MachineCost = object.machineCost;
+				break;
+			} else
+			{
+				// TODO: Display Message in scene
+				if(GEngine)
+				{
+					GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Red, TEXT("Not enough cash"));
+				}
+			}
 			
-			placingMachine = GetWorld()->SpawnActor<AArcadeMachine>(object.PlacingObject, FVector::ZeroVector, FRotator::ZeroRotator);
-			break;
 		}
 	}
 }
@@ -72,8 +83,10 @@ void ABuildingController::PlaceObjectInWorld()
 		return;
 	
 	Controller->AddArcadeMachine(placingMachine);		// Adds the object to the list of machines
+	Controller->SpendCash(placingMachine->MachineCost);			// Take cash away from the store as we purchased it
 	placingMachine = nullptr;							// Sets the placing object to null as we aren't placing anything now
 	Controller->ToggleBuildMode();						// Takes us out of build mode
+	
 }
 
 void ABuildingController::LineTraceToGround()

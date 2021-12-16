@@ -18,6 +18,14 @@ void AGameController::ToggleBuildMode()
 	ToggleBuildingUI();
 }
 
+FString AGameController::DisplayStoreCash()
+{
+	FString data = "$ ";
+	FString amount = FString::FromInt(storeCash);
+	data.Append(amount);
+	return data;
+}
+
 // Called when the game starts or when spawned
 void AGameController::BeginPlay()
 {

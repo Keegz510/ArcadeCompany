@@ -25,6 +25,14 @@ public:
 
 	/// Returns the amount of cash the player has
 	FORCEINLINE int32 GetStoreCash() const { return storeCash; }
+	/// Returns the amount of cash in a string
+	UFUNCTION(BlueprintCallable)
+	FString DisplayStoreCash();
+
+	/// Handles taking cash away fromm the store (Generally when spending cash)
+	FORCEINLINE void SpendCash(int32 amount) { storeCash -= amount; }
+	/// Handles adding cash to the store
+	FORCEINLINE void AddCash(int32 amount) { storeCash += amount; }
 	
 protected:
 	// Called when the game starts or when spawned

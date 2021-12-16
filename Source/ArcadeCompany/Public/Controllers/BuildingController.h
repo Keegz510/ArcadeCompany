@@ -15,6 +15,8 @@ public:
 	FName ObjectName;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	TSubclassOf<class AArcadeMachine> PlacingObject;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	int32 machineCost;
 };
 
 UCLASS()
