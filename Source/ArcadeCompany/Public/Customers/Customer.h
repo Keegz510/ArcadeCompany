@@ -7,6 +7,7 @@
 #include "Customer.generated.h"
 
 class USkeletalMesh;
+class UBehaviorTree;
 
 USTRUCT(BlueprintType)
 struct FSatisfactionValues
@@ -56,6 +57,9 @@ protected:
 	float WrongSnackDecrease;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Satisfaction", meta=(AllowPrivateAccess="true"))
 	float currentSatisfaction = 50.0f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="AI", meta=(AllowPrivateAccess="true"))
+	UBehaviorTree* behaviorTree;
 
 	void SetSatisfactionDecreases();
 };
