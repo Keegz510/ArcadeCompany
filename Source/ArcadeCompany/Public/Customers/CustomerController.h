@@ -22,6 +22,8 @@ public:
 	FORCEINLINE UBlackboardComponent* GetBlackboardComp() const { return bbComponent; }
 	/// Returns the behaviour tree component
 	FORCEINLINE UBehaviorTreeComponent* GetTreeComp() const { return btComponent; }
+	/// Returns the reference to the customer
+	FORCEINLINE ACustomer* GetOwningCustomer() const { return customer; }
 private:
 	/// Reference to the behavior tree
 	UBehaviorTreeComponent* btComponent;
