@@ -51,6 +51,8 @@ public:
 
 	FORCEINLINE UBehaviorTree* GetBT() const { return behaviorTree; }
 
+	FORCEINLINE int32 GetTokensAmount() const { return tokens; }
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -77,6 +79,9 @@ protected:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="AI|States", meta=(AllowPrivateAccess="true"))
 	TEnumAsByte<ECustomerState> currentState;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Play Settings", meta=(AllowPrivateAccess="true"))
+	int32 tokens;
 
 	void SetSatisfactionDecreases();
 };
