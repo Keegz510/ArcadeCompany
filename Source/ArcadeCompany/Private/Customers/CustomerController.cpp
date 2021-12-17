@@ -16,6 +16,13 @@ ACustomerController::ACustomerController()
 	CustState = FName(TEXT("CustomerState"));
 }
 
+void ACustomerController::SetMoveLocation(const FVector location) const
+{
+	if(GEngine)
+		GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Yellow, TEXT("Setting move to location"));
+	bbComponent->SetValueAsVector(MoveToLoc, location);
+}
+
 void ACustomerController::OnPossess(APawn* InPawn)
 {
 	Super::OnPossess(InPawn);

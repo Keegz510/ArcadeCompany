@@ -36,7 +36,10 @@ void AGameController::BeginPlay()
 
 void AGameController::SpawnCharacter()
 {
-	
+	if(GEngine)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Purple, TEXT("Spawning Character"));
+	}
 	// Generate a random value to help determine if someone is coming into the store
 	int randValue = FMath::RandRange(1, 100);
 	
