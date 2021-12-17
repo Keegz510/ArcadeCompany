@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "AIController.h"
+#include "Customer.h"
 #include "BehaviorTree/BlackboardComponent.h"
 #include "CustomerController.generated.h"
 class UBehaviorTreeComponent;
@@ -29,6 +30,7 @@ public:
 #pragma region Blackboard Setting Methods
 	
 	void SetMoveLocation(const FVector location) const;
+	void UpdateCustomerState(const ECustomerState newState);
 
 #pragma endregion
 

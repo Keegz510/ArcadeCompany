@@ -49,9 +49,12 @@ public:
 	// Sets default values for this character's properties
 	ACustomer();
 
+	/// Returns the reference to the behaviour tree
 	FORCEINLINE UBehaviorTree* GetBT() const { return behaviorTree; }
-
+	/// Returns how many tokens the customer has
 	FORCEINLINE int32 GetTokensAmount() const { return tokens; }
+	/// Sets the current state of the customer
+	FORCEINLINE void SetCustomerState(const ECustomerState State) { currentState = State; }
 
 protected:
 	// Called when the game starts or when spawned

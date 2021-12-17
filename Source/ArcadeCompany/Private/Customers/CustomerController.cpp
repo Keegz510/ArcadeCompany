@@ -23,6 +23,12 @@ void ACustomerController::SetMoveLocation(const FVector location) const
 	bbComponent->SetValueAsVector(MoveToLoc, location);
 }
 
+void ACustomerController::UpdateCustomerState(const ECustomerState newState)
+{
+	bbComponent->SetValueAsEnum(CustState, newState);
+	customer->SetCustomerState(newState);
+}
+
 void ACustomerController::OnPossess(APawn* InPawn)
 {
 	Super::OnPossess(InPawn);
