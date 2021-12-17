@@ -10,7 +10,28 @@ ACustomer::ACustomer()
 	PrimaryActorTick.bCanEverTick = false;
 	SetSatisfactionDecreases();
 
+	Tags.Add("Customer");
+
 	currentState = ECustomerState::Deciding;
+	bHasWaitedForTokens = false;
+}
+
+void ACustomer::SetCustomerState(const ECustomerState State)
+{
+	currentState = State;
+
+	switch(currentState)
+	{
+		case ECustomerState::WaitingForTokens:
+			IsWaitingForTokens();
+			break;
+	}
+}
+
+void ACustomer::IsWaitingForTokens()
+{
+	GetWorld()->GetTimerManager().SetTimer(
+		waitingForTokensTimer, this, &ACustomer::WaitTimeSatisfactionDecrease, 5.0f, false);
 }
 
 // Called when the game starts or when spawned
@@ -25,6 +46,14 @@ void ACustomer::BeginPlay()
 	{
 		GetMesh()->SetSkeletalMesh(femaleMesh);
 	}
+}
+
+void ACustomer::DecreaseSatisfaction(const float value, bool isWaitingForTokens)
+{
+	currentSatisfaction -= value;
+
+	if(isWaitingForTokens)
+		bHasWaitedForTokens = true;
 }
 
 void ACustomer::SetSatisfactionDecreases()

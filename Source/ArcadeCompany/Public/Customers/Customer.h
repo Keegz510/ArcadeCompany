@@ -57,9 +57,11 @@ public:
 	/// Returns how many tokens the customer has
 	FORCEINLINE int32 GetTokensAmount() const { return tokens; }
 	/// Sets the current state of the customer
-	FORCEINLINE void SetCustomerState(const ECustomerState State) { currentState = State; }
+	void SetCustomerState(const ECustomerState State);
 	/// Returns the current state of the character
 	FORCEINLINE ECustomerState GetCurrentState() const { return currentState; }
+
+	void IsWaitingForTokens();
 
 protected:
 	// Called when the game starts or when spawned
@@ -93,5 +95,18 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Play Settings", meta=(AllowPrivateAccess="true"))
 	int32 tokens;
 
+	/// Timer that decrease stamina when waiting for tokens
+	FTimerHandle waitingForTokensTimer;
+	/// Has the customer been waiting for tokens for more than the initial timer
+	bool bHasWaitedForTokens;
+	/// Decreases the satisfaction value, and they are waiting for tokens will
+	/// Set that they have been waiting
+	void DecreaseSatisfaction(const float value, bool isWaitingForTokens = false);
+
+	
+	/// Handles decreasing the statisfaction when waiting
+	FORCEINLINE void WaitTimeSatisfactionDecrease() { DecreaseSatisfaction(WaitTimeDecrease); }
+
+	/// Called on begin play to set the satisfaction
 	void SetSatisfactionDecreases();
 };
