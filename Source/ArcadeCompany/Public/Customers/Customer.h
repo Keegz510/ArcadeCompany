@@ -34,10 +34,13 @@ enum ECustomerState
 {
 	Deciding,
 	WantsSnack,
-	OrderSnack,
+	OrderingSnack,
 	PlayingMachine,
 	MoveToMachine,
-	FindMachine
+	FindMachine,
+	Leaving,
+	BuyingTokens,
+	WaitingForTokens
 };
 
 UCLASS()
@@ -55,6 +58,8 @@ public:
 	FORCEINLINE int32 GetTokensAmount() const { return tokens; }
 	/// Sets the current state of the customer
 	FORCEINLINE void SetCustomerState(const ECustomerState State) { currentState = State; }
+	/// Returns the current state of the character
+	FORCEINLINE ECustomerState GetCurrentState() const { return currentState; }
 
 protected:
 	// Called when the game starts or when spawned
@@ -66,7 +71,8 @@ protected:
 	/// Reference to the character female Mesh
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Meshes", meta=(AllowPrivateAccess="true"))
 	USkeletalMesh* femaleMesh;
-
+	
+#pragma region Satisfaction Values
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Satisfaction", meta=(AllowPrivateAccess="true"))
 	FSatisfactionValues satisfactionValues;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category="Satisfaction", meta=(AllowPrivateAccess="true"))
@@ -75,14 +81,15 @@ protected:
 	float WrongSnackDecrease;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Satisfaction", meta=(AllowPrivateAccess="true"))
 	float currentSatisfaction = 50.0f;
-
+#pragma endregion
+	
 	/// Reference to the behaviour tree
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="AI|Components", meta=(AllowPrivateAccess="true"))
 	UBehaviorTree* behaviorTree;
-
+	/// Reference to the current state of the customer
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="AI|States", meta=(AllowPrivateAccess="true"))
 	TEnumAsByte<ECustomerState> currentState;
-
+	/// How many tokens the customer has
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Play Settings", meta=(AllowPrivateAccess="true"))
 	int32 tokens;
 
