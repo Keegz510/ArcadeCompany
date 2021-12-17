@@ -28,7 +28,7 @@ public:
 
 #pragma region Blackboard Setting Methods
 	
-	FORCEINLINE void SetMoveLocation(const FVector location) const { bbComponent->SetValueAsVector(MoveToLoc, location); }
+	void SetMoveLocation(const FVector location) const;
 
 #pragma endregion
 

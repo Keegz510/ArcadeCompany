@@ -28,15 +28,19 @@ EBTNodeResult::Type UWanderToPoint::ExecuteTask(UBehaviorTreeComponent& OwnerCom
 		if(selectedWanderPoint)
 		{
 			// Get the customer
-			if(auto cust = Cast<ACustomer>(OwnerComp.GetOwner()))
+			if(auto contr = Cast<ACustomerController>(OwnerComp.GetAIOwner()))
 			{
-				// Get the controller from the customer and set the location to move to
-				if(auto contr = Cast<ACustomerController>(cust->Controller))
-				{
-					contr->SetMoveLocation(selectedWanderPoint->GetActorLocation());
-					return EBTNodeResult::Succeeded;
-				}
+				contr->SetMoveLocation(selectedWanderPoint->GetActorLocation());
+				return EBTNodeResult::Succeeded;
+			} else
+			{
+				if(GEngine)
+					GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Red, TEXT("No Controller"));
 			}
+		} else
+		{
+			if(GEngine)
+				GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Red, TEXT("No Selected Point"));
 		}
 	} else
 	{
