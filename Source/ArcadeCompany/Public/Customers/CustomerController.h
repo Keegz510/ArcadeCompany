@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "AIController.h"
+#include "BehaviorTree/BlackboardComponent.h"
 #include "CustomerController.generated.h"
 class UBehaviorTreeComponent;
 class UBlackboardComponent;
@@ -24,6 +25,14 @@ public:
 	FORCEINLINE UBehaviorTreeComponent* GetTreeComp() const { return btComponent; }
 	/// Returns the reference to the customer
 	FORCEINLINE ACustomer* GetOwningCustomer() const { return customer; }
+
+#pragma region Blackboard Setting Methods
+	
+	FORCEINLINE void SetMoveLocation(const FVector location) const { bbComponent->SetValueAsVector(MoveToLoc, location); }
+
+#pragma endregion
+
+
 private:
 	/// Reference to the behavior tree
 	UBehaviorTreeComponent* btComponent;
