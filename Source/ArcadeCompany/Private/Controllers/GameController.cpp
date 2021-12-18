@@ -26,6 +26,23 @@ FString AGameController::DisplayStoreCash()
 	return data;
 }
 
+void AGameController::AddSatisfaction(float satisfaction)
+{
+	
+	satisfactionRatings.Add(satisfaction);			// Add the new satisfaction
+	float total = 0.0f;				// Reference to the total of the satisfactions added together
+
+	// Loop through each satisfaction and add them together
+	for(auto rating : satisfactionRatings)
+	{
+		total += rating;
+	}
+
+	
+	overallSatisfaction = total / satisfactionRatings.Num();			// Determine the average rating
+	
+}
+
 // Called when the game starts or when spawned
 void AGameController::BeginPlay()
 {

@@ -33,6 +33,8 @@ public:
 	FORCEINLINE void SpendCash(int32 amount) { storeCash -= amount; }
 	/// Handles adding cash to the store
 	FORCEINLINE void AddCash(int32 amount) { storeCash += amount; }
+
+	void AddSatisfaction(float satisfaction);
 	
 protected:
 	// Called when the game starts or when spawned
@@ -75,6 +77,14 @@ private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Store Properties", meta=(AllowPrivateAccess="true"))
 	int32 storeCash;
 
+	/// How much cash the store starts with
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Store Properties|Settings", meta=(AllowPrivateAccess="true"))
 	int32 startWithStoreCash;
+
+	/// Reference to all the satisfaction ratings
+	TArray<float> satisfactionRatings;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Satisfaction", meta=(AllowPrivateAccess="true"))
+	float overallSatisfaction;
+
+	
 };
