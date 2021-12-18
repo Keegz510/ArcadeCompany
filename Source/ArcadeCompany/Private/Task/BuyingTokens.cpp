@@ -9,7 +9,7 @@
 EBTNodeResult::Type UBuyingTokens::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
 {
 
-	if(auto controller = Cast<ACustomerController>(OwnerComp.GetAIOwner()))
+	if(const auto controller = Cast<ACustomerController>(OwnerComp.GetAIOwner()))
 	{
 		controller->UpdateCustomerState(ECustomerState::WaitingForTokens);
 		return EBTNodeResult::Succeeded;
