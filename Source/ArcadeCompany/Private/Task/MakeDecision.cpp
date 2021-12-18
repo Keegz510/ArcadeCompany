@@ -13,7 +13,7 @@ EBTNodeResult::Type UMakeDecision::ExecuteTask(UBehaviorTreeComponent& OwnerComp
 	{
 		if(auto customer = Cast<ACustomer>(OwnerComp.GetOwner()))
 		{
-			int32 tokens = customer->GetTokensAmount();
+			const int32 tokens = customer->GetTokensAmount();
 			if(tokens == 0)
 			{
 				int32 randValue = FMath::RandRange(1, 100);
