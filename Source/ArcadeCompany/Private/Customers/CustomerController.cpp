@@ -29,6 +29,12 @@ void ACustomerController::UpdateCustomerState(const ECustomerState newState)
 	customer->SetCustomerState(newState);
 }
 
+void ACustomerController::BeginPlay()
+{
+	Super::BeginPlay();
+	UpdateCustomerState(ECustomerState::Deciding);
+}
+
 void ACustomerController::OnPossess(APawn* InPawn)
 {
 	Super::OnPossess(InPawn);

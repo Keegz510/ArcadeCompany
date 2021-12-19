@@ -11,12 +11,12 @@ EBTNodeResult::Type UMakeDecision::ExecuteTask(UBehaviorTreeComponent& OwnerComp
 
 	if(auto controller = Cast<ACustomerController>(OwnerComp.GetAIOwner()))
 	{
-		if(auto customer = Cast<ACustomer>(OwnerComp.GetOwner()))
+		if(auto customer = Cast<ACustomer>(controller->GetOwningCustomer()))
 		{
 			const int32 tokens = customer->GetTokensAmount();
 			if(tokens == 0)
 			{
-				int32 randValue = FMath::RandRange(1, 100);
+				const int32 randValue = FMath::RandRange(1, 100);
 				if(randValue > 70)
 				{
 					controller->UpdateCustomerState(ECustomerState::Leaving);

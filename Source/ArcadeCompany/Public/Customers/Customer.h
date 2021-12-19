@@ -60,6 +60,8 @@ public:
 	void SetCustomerState(const ECustomerState State);
 	/// Returns the current state of the character
 	FORCEINLINE ECustomerState GetCurrentState() const { return currentState; }
+	/// Returns the customer satisfaction
+	FORCEINLINE float GetSatisfaction() const { return currentSatisfaction; }
 
 	void IsWaitingForTokens();
 

@@ -34,6 +34,9 @@ public:
 	/// Handles adding cash to the store
 	FORCEINLINE void AddCash(int32 amount) { storeCash += amount; }
 
+	/// Returns the spawn location
+	FORCEINLINE FVector GetSpawnLocation() const { return spawnLocation; }
+
 	void AddSatisfaction(float satisfaction);
 	
 protected:

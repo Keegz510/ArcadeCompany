@@ -34,6 +34,9 @@ public:
 
 #pragma endregion
 
+protected:
+	virtual void BeginPlay() override;
+
 
 private:
 	/// Reference to the behavior tree
