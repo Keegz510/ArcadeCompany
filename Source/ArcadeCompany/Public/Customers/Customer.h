@@ -62,6 +62,10 @@ public:
 	FORCEINLINE ECustomerState GetCurrentState() const { return currentState; }
 	/// Returns the customer satisfaction
 	FORCEINLINE float GetSatisfaction() const { return currentSatisfaction; }
+	/// Returns the amount of tokens the customer is after
+	FORCEINLINE int32 GetRequestedTokens() const { return requestedTokens; }
+	/// Adds tokens to the customer
+	FORCEINLINE void AddTokens(const int32 amount) { tokens += amount; currentState = ECustomerState::Deciding; }
 
 	void IsWaitingForTokens();
 
@@ -96,6 +100,8 @@ protected:
 	/// How many tokens the customer has
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Play Settings", meta=(AllowPrivateAccess="true"))
 	int32 tokens;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Play Settings", meta=(AllowPrivateAccess="true"))
+	int32 requestedTokens;
 
 	/// Timer that decrease stamina when waiting for tokens
 	FTimerHandle waitingForTokensTimer;

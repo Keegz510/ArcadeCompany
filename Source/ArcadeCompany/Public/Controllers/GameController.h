@@ -31,13 +31,17 @@ public:
 
 	/// Handles taking cash away fromm the store (Generally when spending cash)
 	FORCEINLINE void SpendCash(int32 amount) { storeCash -= amount; }
-	/// Handles adding cash to the store
+	/// Handles adding cash to the store	
 	FORCEINLINE void AddCash(int32 amount) { storeCash += amount; }
 
 	/// Returns the spawn location
 	FORCEINLINE FVector GetSpawnLocation() const { return spawnLocation; }
 
 	void AddSatisfaction(float satisfaction);
+
+	virtual void Tick(float DeltaSeconds) override;
+
+	void GiveCustomerTokens();
 	
 protected:
 	// Called when the game starts or when spawned
@@ -89,5 +93,8 @@ private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Satisfaction", meta=(AllowPrivateAccess="true"))
 	float overallSatisfaction;
 
-	
+	ACustomer* mouseOverCustomer;
+
+	void LineTraceToCustomer();
+
 };

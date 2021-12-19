@@ -3,12 +3,13 @@
 
 #include "ArcadeCompany/Public/Controllers/GameController.h"
 #include "ArcadeCompany/Public/Customers/Customer.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 AGameController::AGameController()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = false;
+	PrimaryActorTick.bCanEverTick = true;
 
 }
 
@@ -43,6 +44,25 @@ void AGameController::AddSatisfaction(float satisfaction)
 	
 }
 
+void AGameController::Tick(float DeltaSeconds)
+{
+	Super::Tick(DeltaSeconds);
+
+	LineTraceToCustomer();
+	
+}
+
+void AGameController::GiveCustomerTokens()
+{
+	if(mouseOverCustomer != nullptr)
+	{
+		int32 tokens = mouseOverCustomer->GetRequestedTokens();
+		mouseOverCustomer->AddTokens(tokens);
+		storeCash += tokens;
+		mouseOverCustomer = nullptr;
+	}
+}
+
 // Called when the game starts or when spawned
 void AGameController::BeginPlay()
 {
@@ -72,4 +92,21 @@ void AGameController::StartSpawnTimer()
 	float randTime = FMath::RandRange(MinSpawnWaitTime, MaxSpawnWaitTime);
 	GetWorld()->GetTimerManager().SetTimer(
 		nextSpawnTimer, this, &AGameController::SpawnCharacter, randTime, false);
+}
+
+void AGameController::LineTraceToCustomer()
+{
+	if(const auto pc = UGameplayStatics::GetPlayerController(GetWorld(), 0))
+	{
+		FHitResult hit;
+		pc->GetHitResultUnderCursor(ECollisionChannel::ECC_WorldDynamic, false, hit);
+
+		if(auto cust = Cast<ACustomer>(hit.GetActor()))
+		{
+			if(cust->GetCurrentState() == ECustomerState::WaitingForTokens)
+			{
+				mouseOverCustomer = cust;
+			}
+		}
+	}
 }

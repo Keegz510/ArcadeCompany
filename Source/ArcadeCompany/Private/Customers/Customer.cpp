@@ -2,6 +2,7 @@
 
 
 #include "ArcadeCompany/Public/Customers/Customer.h"
+#include "ArcadeCompany/Public/Customers/CustomerController.h"
 
 // Sets default values
 ACustomer::ACustomer()
@@ -11,8 +12,7 @@ ACustomer::ACustomer()
 	SetSatisfactionDecreases();
 
 	Tags.Add("Customer");
-
-	currentState = ECustomerState::Deciding;
+	
 	bHasWaitedForTokens = false;
 }
 
@@ -24,6 +24,7 @@ void ACustomer::SetCustomerState(const ECustomerState State)
 	{
 		case ECustomerState::WaitingForTokens:
 			IsWaitingForTokens();
+			requestedTokens = FMath::RandRange(5, 30);			// Determine how many tokens the customer wants
 			break;
 	}
 }
@@ -46,6 +47,8 @@ void ACustomer::BeginPlay()
 	{
 		GetMesh()->SetSkeletalMesh(femaleMesh);
 	}
+	
+	Cast<ACustomerController>(GetController())->UpdateCustomerState(ECustomerState::Deciding);
 }
 
 void ACustomer::DecreaseSatisfaction(const float value, bool isWaitingForTokens)
