@@ -73,4 +73,8 @@ private:
 	void ZoomIn();
 	/// Handles the camera zoom out
 	void ZoomOut();
+
+
+	/// Handles selecing a customer on the game controller
+	void Click();
 };

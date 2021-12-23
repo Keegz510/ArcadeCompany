@@ -49,6 +49,10 @@ void ACamController::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 	PlayerInputComponent->BindAction("CancelPlacement", IE_Pressed, this, &ACamController::CancelBuilding);
 	PlayerInputComponent->BindAction("RotatePlacingObject", IE_Pressed, this, &ACamController::RotateMachine);
 	PlayerInputComponent->BindAction("PlaceObject", IE_Pressed, this, &ACamController::PlaceObject);
+
+	// Click
+	PlayerInputComponent->BindAction("Click", IE_Pressed, this, &ACamController::Click);
+	
 }
 
 void ACamController::MoveForward(const float value)
@@ -113,5 +117,12 @@ void ACamController::ZoomOut()
 	}
 }
 
+void ACamController::Click()
+{
+	AGameController* GC = Cast<AGameController>(UGameplayStatics::GetActorOfClass(GetWorld(), AGameController::StaticClass()));
+	if(GC)
+		if(!GC->IsInBuildMode())
+			GC->GiveCustomerTokens();
+}
 
 
