@@ -65,7 +65,7 @@ public:
 	/// Returns the amount of tokens the customer is after
 	FORCEINLINE int32 GetRequestedTokens() const { return requestedTokens; }
 	/// Adds tokens to the customer
-	FORCEINLINE void AddTokens(const int32 amount) { tokens += amount; currentState = ECustomerState::Deciding; }
+	FORCEINLINE void AddTokens(const int32 amount) { tokens += amount; currentState = ECustomerState::Deciding; requestedTokens = 0; }
 
 	void IsWaitingForTokens();
 
